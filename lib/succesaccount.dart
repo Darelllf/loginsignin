@@ -20,7 +20,7 @@ class _SaccountState extends State<Saccount> {
                 width: 150,
                 height: 50,
                  decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                                 begin: Alignment.topRight,
                                 end: Alignment.bottomLeft,
                                 colors: <Color>[
@@ -32,7 +32,7 @@ class _SaccountState extends State<Saccount> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                                 Text(
                                 'Succesed Create acccount',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(

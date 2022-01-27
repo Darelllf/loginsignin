@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:loginsignin/pi/notification_api.dart';
 import 'package:loginsignin/succesaccount.dart';
 import 'package:loginsignin/succeslogin.dart';
 import 'signup.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -9,10 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      
-       routes: <String, WidgetBuilder>{
+      routes: <String, WidgetBuilder>{
         '/signup': (BuildContext context) => const SignupPage()
       },
       home: const MyHomePage(),
@@ -21,13 +22,29 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key, String? payload}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    NotificationApi.init();
+    listenNotifications();
+  }
+
+  void listenNotifications() =>
+      NotificationApi.onNotifications.stream.listen(onClickedNotification);
+
+  void onClickedNotification(String? payload) =>
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => MyHomePage(payload: payload),
+      ));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,10 +134,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.green,
                     elevation: 7.0,
                     child: GestureDetector(
-                      onTap: () {Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Slogin()),
-            );},
+                      onTap: () => NotificationApi.showNotification(
+                        title: 'Login Succesed',
+                        body: 'You have succesfully login to spotify',
+                        payload: 'Login Succesed',
+                      ) ,
                       child: const Center(
                         child: Text(
                           'LOGIN',
@@ -148,9 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const <Widget>[
-                      Center(
-                        
-                      ),
+                      Center(),
                       SizedBox(height: 10.0),
                       Center(
                         child: Text(
@@ -168,24 +184,29 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           const SizedBox(height: 15.0),
           Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'New to Spotify ?',
-               style: TextStyle(fontFamily: 'Montserrat'),
-            ),
-            const SizedBox(width: 5.0,),
-            InkWell(
-              onTap: (){Navigator.of(context).pushNamed('/signup');},
-              child: const Text('Register',
-              style: TextStyle(
-                color: Colors.green,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline
-                ),),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'New to Spotify ?',
+                style: TextStyle(fontFamily: 'Montserrat'),
+              ),
+              const SizedBox(
+                width: 5.0,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed('/signup');
+                },
+                child: const Text(
+                  'Register',
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline),
+                ),
               )
-          ],
+            ],
           )
         ],
       ),
