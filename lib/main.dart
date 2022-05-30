@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text(
                       'Forgot Password',
                       style: TextStyle(
-                          color: Colors.green,
+                          color: Colors.pink,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Montserrat',
                           decoration: TextDecoration.underline),
@@ -129,40 +129,51 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   height: 40.0,
                   child: Material(
+                    
                     borderRadius: BorderRadius.circular(20.0),
                     shadowColor: Colors.greenAccent,
                     color: Colors.green,
                     elevation: 7.0,
+                    
                     child: GestureDetector(
                       onTap: () => NotificationApi.showNotification(
                         title: 'Login Succesed',
                         body: 'You have succesfully login to spotify',
                         payload: 'Login Succesed',
-                      ) ,
+                      ),
                       child: const Center(
                         child: Text(
                           'LOGIN',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.blue,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat'),
+                             
                         ),
-                      ),
+                       ),
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 20.0,
+                  height: 7.0,
                 ),
-                Container(
+                Container( 
                   height: 40.0,
                   decoration: BoxDecoration(
                       border: Border.all(
-                          color: Colors.black,
+                          color: Colors.red,
                           style: BorderStyle.solid,
-                          width: 1.0),
+                          width: 1.0),                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
                       color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(20.0)),
+                      borderRadius: BorderRadius.circular(20.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 3,
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        )
+                      ]),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const <Widget>[
@@ -201,7 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Register',
                   style: TextStyle(
                       color: Colors.green,
-                      fontFamily: 'Montserrat',
+                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline),
                 ),

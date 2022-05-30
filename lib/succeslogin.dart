@@ -16,11 +16,11 @@ class _SloginState extends State<Slogin> {
             Center(
               
               child: Container(
-                margin: EdgeInsets.only(top: 150),
+                margin: const EdgeInsets.only(top: 150),
                 width: 150,
                 height: 50,
                  decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                                 begin: Alignment.topRight,
                                 end: Alignment.bottomLeft,
                                 colors: <Color>[
@@ -31,7 +31,7 @@ class _SloginState extends State<Slogin> {
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Text(
                                 'Succesed Login',
                                 textAlign: TextAlign.center,
